@@ -38,8 +38,7 @@ namespace BookStoreAPI.Controllers
             }
 
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
-            var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
-            var userToReturn = _mapper.Map<UserForDetailedDto>(createdUser);
+            await _repo.Register(userToCreate, userForRegisterDto.Password);
 
             return StatusCode(201);
         }

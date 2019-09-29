@@ -10,7 +10,7 @@ import { AlertifyService } from '../_services/alertify.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  model: any = {};
+  model: any = {}; // TODO: Почему any? Как быть, если класс user уже занят?
 
   constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router) {
   }
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
       error => {
         this.alertify.error('Не удалось войти');
       },
-      () => {
+      () => { // TODO: Это же finaly? Зачем мы куда-то переходим, если не знаем точно, что вошли?
         this.router.navigate(['/books']);
       }
     );

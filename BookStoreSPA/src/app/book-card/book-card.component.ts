@@ -25,8 +25,8 @@ export class BookCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  selectedBook(id: number) {
-    this.bookService.selectedBook(this.authService.decodedToken.nameid, id).subscribe(data => {
+  selectedBook(id: number) { // TODO: Надо бы в сервис это мувнуть. Ну, и selected не то слово, наверное, не глагол потомучто
+    this.bookService.selectedBook(this.authService.decodedToken.nameid, id).subscribe(data => { // TODO: хорошее слово для этого toggle (переключить), типа toggleBookSelection или типа того. Чтобы было чуть больше феншуя, можно возвращать тут войд, а статус запросить отдельно.
       this.book.isSelected = !this.book.isSelected;
       if (this.book.isSelected) {
         this.alertify.success('Добавили в избранное: ' + this.book.name);
@@ -38,7 +38,7 @@ export class BookCardComponent implements OnInit {
     });
   }
 
-  detail(id: number) {
+  detail(id: number) { // TODO: не глагол. Плюс, прямо в темплейте можно подобные ссылки мутить
     this.router.navigate(['books/' + id]);
   }
 }

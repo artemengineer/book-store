@@ -14,6 +14,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.initData();
+    this.authService.initData(); // TODO: Есть более идеоматический способ) Глянь APP_INITIALIZER
   }
 }

@@ -18,7 +18,7 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  login(model: any) {
+  login(model: any) { // TODO: Почему any?
     return this.http.post(this.baseUrl + 'login', model)
       .pipe(
         map((response: any) => {

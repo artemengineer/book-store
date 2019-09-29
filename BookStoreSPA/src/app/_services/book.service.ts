@@ -25,7 +25,7 @@ export class BookService {
     return this.http.get<Book>(this.baseUrl + 'detail/' + userId + '/' + bookId);
   }
 
-  selectedBook(userId: number, bookId: number) {
+  selectedBook(userId: number, bookId: number) { // TODO: не описаны возвращаемые типы
     return this.http.post(this.baseUrl + 'select/', { userId: userId, bookId: bookId });
   }
 }

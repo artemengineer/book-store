@@ -27,8 +27,9 @@ namespace BookStoreAPI.Repositories
             return user;
         }
 
-        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt) // TODO: Я бы поднял этот метод вверх, чтобы он был над публичными.
         {
+            // TODO: что-то слишком умно для репозитория. Он же по хорошему должен просто с данными работать? Или тут что-то другое задумано?
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
             {
                 var tempHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));

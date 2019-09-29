@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStoreAPI.Repositories
 {
-    public class DatingRepository : IDatingRepository
+    public class DatingRepository : IDatingRepository // TODO: Dating?
     {
         private readonly DataBaseContext _context;
 
@@ -21,14 +21,14 @@ namespace BookStoreAPI.Repositories
             return await _context.Books.ToListAsync();
         }
 
-        public async Task<List<Book>> GetSelectedBooks(int id)
+        public async Task<List<Book>> GetSelectedBooks(int id) // TODO: Может, лучше userId параметр?
         {
-            return await _context.SelectedBooks.Where(n => n.UserId == id).Select(i => i.Book).ToListAsync();
-        }
+            return await _context.SelectedBooks.Where(n => n.UserId == id).Select(i => i.Book).ToListAsync(); // TODO: Почему n и i?
+    }
 
         public async Task<Book> GetBook(int id)
         {
-            return await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
+            return await _context.Books.FirstOrDefaultAsync(b => b.Id == id); // TODO:  Что ещё можно сделать кроме того, чтобы вернуть нул, если ничего не нашлось? Какой способ лучше или хуже?
         }
 
 //        public async Task<SelectedBook> Selected(SelectedBook selectedBook)
@@ -39,12 +39,12 @@ namespace BookStoreAPI.Repositories
 //            return selectedBook;
 //        }
 
-        public async Task<SelectedBook> GetSelectedBook(int userId, int bookId)
+        public async Task<SelectedBook> GetSelectedBook(int userId, int bookId) // TODO: Мне по имени метода кажется, что этот он используется примерно так - если вернул, значит книга выбрана, если не вернул, значит не выбрана. Может, возвращать bool из него?
         {
             return await _context.SelectedBooks.FirstOrDefaultAsync(b => b.UserId == userId && b.BookId == bookId);
         }
 
-        public void Selected(SelectedBook selectedBook)
+        public void Selected(SelectedBook selectedBook) // TODO: Странное название метода
         {
             _context.SelectedBooks.Add(selectedBook);
             _context.SaveChanges();

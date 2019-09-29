@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BookStoreAPI.Models
 {
-    public class Book
+    public class Book // TODO: Почему папка Models не внутри Data? Рандомно или тут есть какая-то интересная философия?
     {
         public Book()
         {

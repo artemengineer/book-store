@@ -4,7 +4,7 @@ using BookStoreAPI.Models;
 
 namespace BookStoreAPI.Data
 {
-    public class AutoMapperProfiles : Profile
+    public class AutoMapperProfiles : Profile // TODO: Что-то не нашёл, как это используется :)
     {
         public AutoMapperProfiles()
         {

@@ -1,9 +1,9 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 
 namespace BookStoreAPI.Models
 {
-    public class Book // TODO: Почему папка Models не внутри Data? Рандомно или тут есть какая-то интересная философия?
+    public class Book // TODO: РџРѕС‡РµРјСѓ РїР°РїРєР° Models РЅРµ РІРЅСѓС‚СЂРё Data? Р Р°РЅРґРѕРјРЅРѕ РёР»Рё С‚СѓС‚ РµСЃС‚СЊ РєР°РєР°СЏ-С‚Рѕ РёРЅС‚РµСЂРµСЃРЅР°СЏ С„РёР»РѕСЃРѕС„РёСЏ?
     {
         public Book()
         {

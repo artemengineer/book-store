@@ -1,10 +1,10 @@
-using AutoMapper;
+п»їusing AutoMapper;
 using BookStoreAPI.Dtos;
 using BookStoreAPI.Models;
 
 namespace BookStoreAPI.Data
 {
-    public class AutoMapperProfiles : Profile // TODO: Что-то не нашёл, как это используется :)
+    public class AutoMapperProfiles : Profile // TODO: Р§С‚Рѕ-С‚Рѕ РЅРµ РЅР°С€С‘Р», РєР°Рє СЌС‚Рѕ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ :)
     {
         public AutoMapperProfiles()
         {

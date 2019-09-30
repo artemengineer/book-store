@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+п»їusing System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BookStoreAPI.Data;
@@ -21,14 +21,14 @@ namespace BookStoreAPI.Repositories
             return await _context.Books.ToListAsync();
         }
 
-        public async Task<List<Book>> GetSelectedBooks(int id) // TODO: Может, лучше userId параметр?
+        public async Task<List<Book>> GetSelectedBooks(int id) // TODO: РњРѕР¶РµС‚, Р»СѓС‡С€Рµ userId РїР°СЂР°РјРµС‚СЂ?
         {
-            return await _context.SelectedBooks.Where(n => n.UserId == id).Select(i => i.Book).ToListAsync(); // TODO: Почему n и i?
+            return await _context.SelectedBooks.Where(n => n.UserId == id).Select(i => i.Book).ToListAsync(); // TODO: РџРѕС‡РµРјСѓ n Рё i?
     }
 
         public async Task<Book> GetBook(int id)
         {
-            return await _context.Books.FirstOrDefaultAsync(b => b.Id == id); // TODO:  Что ещё можно сделать кроме того, чтобы вернуть нул, если ничего не нашлось? Какой способ лучше или хуже?
+            return await _context.Books.FirstOrDefaultAsync(b => b.Id == id); // TODO:  Р§С‚Рѕ РµС‰С‘ РјРѕР¶РЅРѕ СЃРґРµР»Р°С‚СЊ РєСЂРѕРјРµ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РІРµСЂРЅСѓС‚СЊ РЅСѓР», РµСЃР»Рё РЅРёС‡РµРіРѕ РЅРµ РЅР°С€Р»РѕСЃСЊ? РљР°РєРѕР№ СЃРїРѕСЃРѕР± Р»СѓС‡С€Рµ РёР»Рё С…СѓР¶Рµ?
         }
 
 //        public async Task<SelectedBook> Selected(SelectedBook selectedBook)
@@ -39,12 +39,12 @@ namespace BookStoreAPI.Repositories
 //            return selectedBook;
 //        }
 
-        public async Task<SelectedBook> GetSelectedBook(int userId, int bookId) // TODO: Мне по имени метода кажется, что этот он используется примерно так - если вернул, значит книга выбрана, если не вернул, значит не выбрана. Может, возвращать bool из него?
+        public async Task<SelectedBook> GetSelectedBook(int userId, int bookId) // TODO: РњРЅРµ РїРѕ РёРјРµРЅРё РјРµС‚РѕРґР° РєР°Р¶РµС‚СЃСЏ, С‡С‚Рѕ СЌС‚РѕС‚ РѕРЅ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РїСЂРёРјРµСЂРЅРѕ С‚Р°Рє - РµСЃР»Рё РІРµСЂРЅСѓР», Р·РЅР°С‡РёС‚ РєРЅРёРіР° РІС‹Р±СЂР°РЅР°, РµСЃР»Рё РЅРµ РІРµСЂРЅСѓР», Р·РЅР°С‡РёС‚ РЅРµ РІС‹Р±СЂР°РЅР°. РњРѕР¶РµС‚, РІРѕР·РІСЂР°С‰Р°С‚СЊ bool РёР· РЅРµРіРѕ?
         {
             return await _context.SelectedBooks.FirstOrDefaultAsync(b => b.UserId == userId && b.BookId == bookId);
         }
 
-        public void Selected(SelectedBook selectedBook) // TODO: Странное название метода
+        public void Selected(SelectedBook selectedBook) // TODO: РЎС‚СЂР°РЅРЅРѕРµ РЅР°Р·РІР°РЅРёРµ РјРµС‚РѕРґР°
         {
             _context.SelectedBooks.Add(selectedBook);
             _context.SaveChanges();

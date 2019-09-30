@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+п»їusing System.Threading.Tasks;
 using BookStoreAPI.Data;
 using BookStoreAPI.Models;
 using Microsoft.EntityFrameworkCore;
@@ -27,9 +27,9 @@ namespace BookStoreAPI.Repositories
             return user;
         }
 
-        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt) // TODO: Я бы поднял этот метод вверх, чтобы он был над публичными.
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt) // TODO: РЇ Р±С‹ РїРѕРґРЅСЏР» СЌС‚РѕС‚ РјРµС‚РѕРґ РІРІРµСЂС…, С‡С‚РѕР±С‹ РѕРЅ Р±С‹Р» РЅР°Рґ РїСѓР±Р»РёС‡РЅС‹РјРё. 
         {
-            // TODO: что-то слишком умно для репозитория. Он же по хорошему должен просто с данными работать? Или тут что-то другое задумано?
+            // TODO: С‡С‚Рѕ-С‚Рѕ СЃР»РёС€РєРѕРј СѓРјРЅРѕ РґР»СЏ СЂРµРїРѕР·РёС‚РѕСЂРёСЏ. РћРЅ Р¶Рµ РїРѕ С…РѕСЂРѕС€РµРјСѓ РґРѕР»Р¶РµРЅ РїСЂРѕСЃС‚Рѕ СЃ РґР°РЅРЅС‹РјРё СЂР°Р±РѕС‚Р°С‚СЊ? РР»Рё С‚СѓС‚ С‡С‚Рѕ-С‚Рѕ РґСЂСѓРіРѕРµ Р·Р°РґСѓРјР°РЅРѕ?
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
             {
                 var tempHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));

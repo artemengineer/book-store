@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BookStoreAPI.Models;
+using BookStoreAPI.EntityFramework.Models;
 
 namespace BookStoreAPI.Repositories
 {

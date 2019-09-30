@@ -1,5 +1,6 @@
 ﻿using System;
-using BookStoreAPI.Data;
+using BookStoreAPI.EntityFramework;
+using BookStoreAPI.Helpers;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +33,6 @@ namespace BookStoreAPI
 
             host.Run();
         }
-
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)

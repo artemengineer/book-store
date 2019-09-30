@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace BookStoreAPI.Models
+namespace BookStoreAPI.EntityFramework.Models
 {
     public class Book // TODO: Почему папка Models не внутри Data? Рандомно или тут есть какая-то интересная философия?
     {
+        // TODO: Answer: 
+        // TODO: Создал папку EntityFramework, в которую перенес модели и логику 
+
         public Book()
         {
             SelectedBooks = new HashSet<SelectedBook>();

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using BookStoreAPI.Data;
-using BookStoreAPI.Models;
+using BookStoreAPI.EntityFramework;
+using BookStoreAPI.EntityFramework.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStoreAPI.Repositories
@@ -27,7 +27,9 @@ namespace BookStoreAPI.Repositories
             return user;
         }
 
-        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt) // TODO: Я бы поднял этот метод вверх, чтобы он был над публичными. 
+        private bool
+            VerifyPasswordHash(string password, byte[] passwordHash,
+                byte[] passwordSalt) // TODO: Я бы поднял этот метод вверх, чтобы он был над публичными. 
         {
             // TODO: что-то слишком умно для репозитория. Он же по хорошему должен просто с данными работать? Или тут что-то другое задумано?
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))

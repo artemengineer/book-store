@@ -1,7 +1,7 @@
-using BookStoreAPI.Models;
+using BookStoreAPI.EntityFramework.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookStoreAPI.Data.EntitySetups
+namespace BookStoreAPI.EntityFramework.EntitySetups
 {
     public class SelectedBookEntitySetup : BaseEntitySetupManager<SelectedBook>
     {

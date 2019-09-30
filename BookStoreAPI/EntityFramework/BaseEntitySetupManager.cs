@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BookStoreAPI.Data
+namespace BookStoreAPI.EntityFramework
 {
     public abstract class BaseEntitySetupManager<TEntity> where TEntity : class
     {

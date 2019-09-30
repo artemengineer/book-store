@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using BookStoreAPI.Dtos;
-using BookStoreAPI.Models;
+using BookStoreAPI.EntityFramework.Models;
 using BookStoreAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

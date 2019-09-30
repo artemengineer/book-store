@@ -1,9 +1,10 @@
 using System.Collections.Generic;
-using System.Linq;
-using BookStoreAPI.Models;
+using BookStoreAPI.EntityFramework;
+using BookStoreAPI.EntityFramework.Models;
+using Microsoft.EntityFrameworkCore.Internal;
 using Newtonsoft.Json;
 
-namespace BookStoreAPI.Data
+namespace BookStoreAPI.Helpers
 {
     public class Seed
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BookStoreAPI.Models
+namespace BookStoreAPI.EntityFramework.Models
 {
     public class User
     {

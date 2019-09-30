@@ -1,7 +1,7 @@
-using BookStoreAPI.Data.EntitySetups;
+using BookStoreAPI.EntityFramework.EntitySetups;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookStoreAPI.Data
+namespace BookStoreAPI.EntityFramework
 {
     public static class DataBaseSetupManager
     {

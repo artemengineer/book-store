@@ -1,4 +1,4 @@
-namespace BookStoreAPI.Models
+namespace BookStoreAPI.EntityFramework.Models
 {
     public class SelectedBook
     {

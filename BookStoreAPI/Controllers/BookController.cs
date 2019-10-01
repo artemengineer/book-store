@@ -3,10 +3,10 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using BookStoreAPI.Dtos;
+using BookStoreAPI.EntityFramework.Models;
 using BookStoreAPI.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace BookStoreAPI.Controllers
 {
@@ -15,25 +15,23 @@ namespace BookStoreAPI.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        private readonly IDatingRepository _repo;
-        private readonly IConfiguration _config;
+        private readonly IBookRepository _repo;
         private readonly IMapper _mapper;
 
-        public BookController(IDatingRepository repo, IConfiguration config, IMapper mapper)
+        public BookController(IBookRepository repo, IMapper mapper)
         {
-            _config = config;
             _repo = repo;
             _mapper = mapper;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetBooks(int id)
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetBooks(int userId)
         {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             var booksAll = await _repo.GetBooks();
-            var booksSelected = await _repo.GetSelectedBooks(id);
+            var booksSelected = await _repo.GetSelectedBooks(userId);
             var booksToReturn = from book in booksAll
                 select new BookDto
                 {
@@ -47,13 +45,13 @@ namespace BookStoreAPI.Controllers
             return Ok(booksToReturn);
         }
 
-        [HttpGet("select/{id}")]
-        public async Task<IActionResult> GetSelectedBooks(int id)
+        [HttpGet("selected/{userId}")]
+        public async Task<IActionResult> GetSelectedBooks(int userId)
         {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var books = await _repo.GetSelectedBooks(id);
+            var books = await _repo.GetSelectedBooks(userId);
             var booksToReturn = from book in books
                 select new BookDto
                 {
@@ -67,17 +65,17 @@ namespace BookStoreAPI.Controllers
             return Ok(booksToReturn);
         }
 
-        [HttpGet("detail/{userId}/{bookId}")]
-        public async Task<IActionResult> GetDetailBook(int userId, int bookId)
+        [HttpGet("detailed/{userId}/{bookId}")]
+        public async Task<IActionResult> GetDetailedBook(int userId, int bookId)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             var book = await _repo.GetBook(bookId);
             var bookToReturn = _mapper.Map<BookDto>(book);
-            var selectedBook = await _repo.GetSelectedBook(userId, bookId);
+            var isSelectedBook = await _repo.IsSelectedBook(userId, bookId);
 
-            if (selectedBook != null)
+            if (isSelectedBook)
             {
                 bookToReturn.IsSelected = true;
             }
@@ -85,20 +83,21 @@ namespace BookStoreAPI.Controllers
             return Ok(bookToReturn);
         }
 
-        [HttpPost("select")]
-        public async Task<IActionResult> SelectedBook(BookSelectedDto bookSelectedDto)
+        [HttpPost("toggle-book-selection")]
+        public async Task<IActionResult> ToggleBookSelection(BookSelectedDto bookSelectedDto)
         {
             if (bookSelectedDto.UserId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var selectedBook = await _repo.GetSelectedBook(bookSelectedDto.UserId, bookSelectedDto.BookId);
-            if (selectedBook == null)
+            var isSelectedBook = await _repo.IsSelectedBook(bookSelectedDto.UserId, bookSelectedDto.BookId);
+            var selectedBook = _mapper.Map<SelectedBook>(bookSelectedDto);
+            if (isSelectedBook)
             {
-                _repo.Selected(_mapper.Map<SelectedBook>(bookSelectedDto));
+                _repo.Delete(selectedBook);
             }
             else
             {
-                _repo.Delete(selectedBook);
+                _repo.AddSelectedBook(selectedBook);
             }
 
             return Ok();

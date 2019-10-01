@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
+import { User } from '../_models/user';
+import { AppInitService } from '../_services/app-init.service';
 
 
 @Component({
@@ -10,9 +12,14 @@ import { AlertifyService } from '../_services/alertify.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  model: any = {}; // TODO: Почему any? Как быть, если класс user уже занят?
-
-  constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router) {
+  // TODO: Почему any? Как быть, если класс user уже занят?
+  model: User = { id: null, username: null, password: null };
+  constructor(
+    private authService: AuthService,
+    private initService: AppInitService,
+    private alertify: AlertifyService,
+    private router: Router
+  ) {
   }
 
   ngOnInit() {
@@ -22,14 +29,11 @@ export class HeaderComponent implements OnInit {
     this.authService.login(this.model).subscribe(
       next => {
         this.alertify.success('Вы успешно вошли');
+        this.router.navigate(['/books']);
       },
       error => {
         this.alertify.error('Не удалось войти');
-      },
-      () => { // TODO: Это же finaly? Зачем мы куда-то переходим, если не знаем точно, что вошли?
-        this.router.navigate(['/books']);
-      }
-    );
+      });
   }
 
   loggedIn() {
@@ -39,8 +43,8 @@ export class HeaderComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.authService.decodedToken = null;
-    this.authService.currentUser = null;
+    this.initService.decodedToken = null;
+    this.initService.currentUser = null;
     this.alertify.message('Вы вышли');
     this.router.navigate(['']);
   }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './_services/auth.service';
 
 
 @Component({
@@ -10,10 +9,12 @@ import { AuthService } from './_services/auth.service';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  constructor(private authService: AuthService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.authService.initData(); // TODO: Есть более идеоматический способ) Глянь APP_INITIALIZER
+    // TODO: Есть более идеоматический способ) Глянь APP_INITIALIZER
+    // Answer:
+    // Создал класс AppInitService для APP_INITIALIZER
   }
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../_models/book';
-import { AuthService } from '../_services/auth.service';
 import { BookService } from '../_services/book.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
+import { AppInitService } from '../_services/app-init.service';
 
 
 @Component({
@@ -15,10 +15,9 @@ export class BookDetailComponent implements OnInit {
   book: Book;
 
   constructor(
-    private authService: AuthService,
     private bookService: BookService,
+    private initService: AppInitService,
     private route: ActivatedRoute,
-    private router: Router,
     private alertify: AlertifyService
   ) {
   }
@@ -28,7 +27,7 @@ export class BookDetailComponent implements OnInit {
   }
 
   loadBooks() {
-    this.bookService.getDetailBook(this.authService.decodedToken.nameid, this.route.snapshot.params['id']).subscribe(
+    this.bookService.getDetailedBook(this.initService.decodedToken.nameid, this.route.snapshot.params['id']).subscribe(
       (res: Book) => {
         this.book = res;
       },
@@ -38,16 +37,7 @@ export class BookDetailComponent implements OnInit {
     );
   }
 
-  selectedBook(id: number) {
-    this.bookService.selectedBook(this.authService.decodedToken.nameid, id).subscribe(data => {
-      this.book.isSelected = !this.book.isSelected;
-      if (this.book.isSelected) {
-        this.alertify.success('Добавили в избранное: ' + this.book.name);
-      } else {
-        this.alertify.warning('Удалили из избранного: ' + this.book.name);
-      }
-    }, error => {
-      this.alertify.error(error);
-    });
+  toggleBookSelection() {
+    this.bookService.toggleBookSelection(this.book);
   }
 }

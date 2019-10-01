@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../_models/book';
-import { AuthService } from '../_services/auth.service';
 import { BookService } from '../_services/book.service';
-import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
+import { AppInitService } from '../_services/app-init.service';
 
 
 @Component({
@@ -15,9 +14,8 @@ export class BookListComponent implements OnInit {
   books: Book[];
 
   constructor(
-    private authService: AuthService,
+    private initService: AppInitService,
     private bookService: BookService,
-    private route: ActivatedRoute,
     private alertify: AlertifyService
   ) {
   }
@@ -27,7 +25,7 @@ export class BookListComponent implements OnInit {
   }
 
   loadBooks() {
-    this.bookService.getBooks(this.authService.decodedToken.nameid).subscribe(
+    this.bookService.getBooks(this.initService.decodedToken.nameid).subscribe(
       (res: Book[]) => {
         this.books = res;
       },

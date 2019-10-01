@@ -14,34 +14,9 @@ namespace BookStoreAPI.Repositories
             _context = context;
         }
 
-        public async Task<User> Login(string username, string password)
+        public async Task<User> GetUser(string username)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
-
-            if (user == null)
-                return null;
-
-            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-                return null;
-
-            return user;
-        }
-
-        private bool
-            VerifyPasswordHash(string password, byte[] passwordHash,
-                byte[] passwordSalt) // TODO: Я бы поднял этот метод вверх, чтобы он был над публичными. 
-        {
-            // TODO: что-то слишком умно для репозитория. Он же по хорошему должен просто с данными работать? Или тут что-то другое задумано?
-            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
-            {
-                var tempHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                for (int i = 0; i < tempHash.Length; i++)
-                {
-                    if (tempHash[i] != passwordHash[i]) return false;
-                }
-
-                return true;
-            }
+            return await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
         }
 
         public async Task<User> Register(User user, string password)

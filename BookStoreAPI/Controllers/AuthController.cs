@@ -7,6 +7,7 @@ using AutoMapper;
 using BookStoreAPI.Dtos;
 using BookStoreAPI.EntityFramework.Models;
 using BookStoreAPI.Repositories;
+using BookStoreAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -18,13 +19,15 @@ namespace BookStoreAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _repo;
+        private readonly IAuthService _service;
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
 
-        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
+        public AuthController(IAuthRepository repo, IAuthService service, IConfiguration config, IMapper mapper)
         {
             _config = config;
             _repo = repo;
+            _service = service;
             _mapper = mapper;
         }
 
@@ -46,7 +49,7 @@ namespace BookStoreAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto userForLoginDto)
         {
-            var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
+            var userFromRepo = await _service.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
             if (userFromRepo == null)
                 return Unauthorized();

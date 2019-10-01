@@ -2,11 +2,7 @@
 
 namespace BookStoreAPI.EntityFramework.Models
 {
-    // TODO: Почему папка Models не внутри Data? Рандомно или тут есть какая-то интересная философия?
-    /**
-     * Answer:
-     * Переименовал папку Data в папку EntityFramework, в которую перенес модели и логику DbContext 
-     */
+    
     public class Book
     {
         public Book()

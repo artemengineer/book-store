@@ -16,8 +16,7 @@ export class AuthService {
   constructor(private http: HttpClient, private initService: AppInitService,) {
   }
 
-  // TODO: Почему any?
-  // Поменял на User
+
   login(model: User): Observable<void> {
     return this.http.post(this.baseUrl + 'login', model)
       .pipe(

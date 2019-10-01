@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../_models/user';
 
-// TODO: Есть более идеоматический способ) Глянь APP_INITIALIZER
-// Answer:
-// Создал класс AppInitService для APP_INITIALIZER
+
 @Injectable()
 export class AppInitService {
   decodedToken: any;

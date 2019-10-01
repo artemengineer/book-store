@@ -19,7 +19,8 @@ export class BookCardComponent implements OnInit {
   ngOnInit() {
   }
 
-
+  // TODO: Надо бы в сервис это мувнуть. Ну, и selected не то слово, наверное, не глагол потомучто
+  // Перенес в сервис
   toggleBookSelection() {
     this.bookService.toggleBookSelection(this.book);
   }

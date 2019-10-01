@@ -34,7 +34,9 @@ export class BookService {
     return this.http.get<Book>(this.baseUrl + 'detailed/' + userId + '/' + bookId);
   }
 
-
+  // TODO: не описаны возвращаемые типы
+  // Answer:
+  // Добавил типы
   toggleBookSelection(book: Book): void {
     this.http.post(this.baseUrl + 'toggle-book-selection', {
       userId: this.initService.decodedToken.nameid,

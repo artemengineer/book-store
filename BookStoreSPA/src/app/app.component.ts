@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    // TODO: Есть более идеоматический способ) Глянь APP_INITIALIZER
+    // Answer:
+    // Создал класс AppInitService для APP_INITIALIZE, добавил в app.module.ts
   }
 }

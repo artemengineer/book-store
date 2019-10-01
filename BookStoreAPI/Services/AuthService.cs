@@ -13,7 +13,14 @@ namespace BookStoreAPI.Services
             _repo = repo;
         }
 
-        
+        // TODO: Я бы поднял этот метод вверх, чтобы он был над публичными. 
+        // TODO: что-то слишком умно для репозитория. Он же по хорошему должен просто с данными работать? Или тут что-то другое задумано?
+        /**
+         * Answer:
+         * Создал класс AuthService, перенес сюда логику с контролера AuthController для логина
+         * По хорошему почти всегда нужна прослойка Контролер -> Сервис(для логики) -> Репозиторий(для работы с базой)
+         * Вначале я это не делал сервис исходя, что это тестовый, но для примера сделал сервис с 1 методом, ну чтобы ты понимал, что я это понимаю :)
+         */
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
